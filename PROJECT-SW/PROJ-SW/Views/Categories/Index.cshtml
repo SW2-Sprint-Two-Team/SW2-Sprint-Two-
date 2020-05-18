@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PROJ_SW.Model.Category>
+
+@{
+    ViewBag.Title = "Category";
+}
+    <style>
+        .data {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: larger;
+            font-weight: bolder
+        }
+
+        .header-table {
+            color: darkblue;
+            font-size: x-large;
+            font-family: 'Times New Roman', Times, serif
+        }
+
+        h1 {
+            font-weight: 900;
+            color: midnightblue
+        }
+    </style>
+
+
+<h1 style="margin-top:50px;text-align:center">Category</h1>
+<h4 class="text-success"> @TempData["msg"]</h4>
+<p>
+    <a href="@Url.Action("Create","Categories")" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus"></span>
+        Create
+    </a>
+</p>
+<table class="table">
+    <tr class="header-table">
+        <th>
+            @Html.DisplayNameFor(model => model.cate_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cate_Image)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="data">
+            <td>
+                @Html.DisplayFor(modelItem => item.cate_name)
+            </td>
+            <td>
+
+                <img src="@Url.Content(item.Cate_Image)" width="171" height="180" />
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.cate_id } , new { @class="btn btn-success" }) |*@
+                <a href="@Url.Action("Edit","Categories", new { id= item.cate_id} )" class="btn btn-success" target="_blank">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    Edit
+                </a>
+                <br />
+                <br />
+                <a href="@Url.Action("Delete","Categories", new { id= item.cate_id} )" class="btn btn-danger" target="_blank">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Delete
+                </a>
+
+                <br />
+                <br />
+                <a href="@Url.Action("ViewProduct","Categories", new { id= item.cate_id} )" class="btn btn-warning" target="_blank">
+                    <span class="glyphicon glyphicon-hand-right"></span>
+                    View Product
+                </a>
+
+            </td>
+        </tr>
+    }
+
+</table>
